@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ReviewList from '../components/ReviewList';
+import PhotoGallery from '../components/PhotoGallery';
 
 const Home = () => {
   const [reviews, setReviews] = useState([]);
@@ -17,6 +18,7 @@ const Home = () => {
 
   return (
     <div className="container mx-auto p-4">
+      <PhotoGallery />
       <h1 className="text-4xl font-bold text-center mb-8 text-teal-600">Tea Stall Reviews</h1>
       
       {/* Create a card for posting a new review */}
