@@ -18,6 +18,7 @@ const Home = () => {
 
   return (
     <div className="container mx-auto p-4">
+      <p className="text-gray-700 text-center">জীবনটা ঠিক যেন এক কাপ চায়ের মতো, তার স্বাদ ঠিক তেমনটাই হবে যেমনটা আপনি সেটিকে বানাবেন।</p>
       <PhotoGallery />
       <h1 className="text-4xl font-bold text-center mb-8 text-teal-600">Tea Stall Reviews</h1>
       

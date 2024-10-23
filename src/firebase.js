@@ -1,6 +1,6 @@
 // src/firebase.js
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth"; // Import for authentication
 import { getStorage } from "firebase/storage"; // Import for storage
@@ -18,7 +18,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+
 const db = getFirestore(app); // Firestore for database
 const auth = getAuth(app); // Authentication
 const storage = getStorage(app); // Storage for uploading files
