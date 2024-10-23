@@ -30,7 +30,7 @@ const ReviewList = () => {
               <span className="ml-2 text-gray-500">{review.rating} Stars</span>
             </div>
             {review.imageUrl && (
-              <img src={review.imageUrl} alt={review.title} className="mt-2 rounded" />
+              <img src={review.imageUrl} alt={review.title} className="mt-2 rounded w-64 h-48 object-cover" />
             )}
           </div>
         ))}
