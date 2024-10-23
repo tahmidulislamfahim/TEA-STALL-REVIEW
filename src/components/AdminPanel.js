@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase';
-import axios from 'axios';
+
 
 const AdminPanel = () => {
   const [reviews, setReviews] = useState([]);
