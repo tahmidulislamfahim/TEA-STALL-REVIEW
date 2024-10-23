@@ -56,22 +56,22 @@ const ReviewForm = () => {
   };
 
   return (
-    <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-      <h2 className="text-3xl font-bold mb-4">Share Your Tea Stall Experience</h2> {/* Title for the form */}
+    <div className="bg-gray-100 p-8 rounded-lg shadow-md max-w-lg mx-auto mt-10">
+      <h2 className="text-3xl font-bold mb-6 text center">Share Your Tea Stall Experience</h2> {/* Title for the form */}
       <form onSubmit={handleSubmit}>
         {/* Title Input Field */}
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="Title of your review"
+          placeholder="Title or stall name"
           className="w-full p-2 border border-gray-300 rounded mb-4"
           required
         />
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Write your review here"
+          placeholder="Write your review here with location"
           className="w-full p-2 border border-gray-300 rounded mb-4"
           required
         />
