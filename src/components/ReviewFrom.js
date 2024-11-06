@@ -5,28 +5,27 @@ import { collection, addDoc } from "firebase/firestore"; // Firestore methods
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // Firebase storage methods
 
 const ReviewForm = () => {
-  const [title, setTitle] = useState(''); // State for title
+  const [location, setLocation] = useState('');  // State for location
+  const [shopName, setShopName] = useState(''); 
   const [text, setText] = useState('');
   const [rating, setRating] = useState(1);
   const [file, setFile] = useState(null);
+  const [showSnackbar, setShowSnackbar] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (file) {
-      const imageUrl = await uploadImage(file);
-      const reviewData = {
-        title, // Include title in review data
-        text,
-        rating,
-        imageUrl,
-        timestamp: new Date(),
-      };
-      submitReview(reviewData);
-    } else {
-      // Handle case when there's no file (if needed)
-      const reviewData = { title, text, rating, timestamp: new Date() }; // Include title here
-      submitReview(reviewData);
-    }
+    const imageUrl = file ? await uploadImage(file) : null;
+    
+    const reviewData = {
+      location,
+      shopName,
+      text,
+      rating,
+      imageUrl,
+      timestamp: new Date(),
+    };
+
+    submitReview(reviewData);
   };
 
   const uploadImage = async (file) => {
@@ -45,11 +44,17 @@ const ReviewForm = () => {
     try {
       const docRef = await addDoc(collection(db, "reviews"), reviewData);
       console.log("Review written with ID: ", docRef.id);
-      // Optionally reset form state after submission
-      setTitle(''); // Reset title
+
+      // Show snackbar and reset form
+      setShowSnackbar(true);
+      setLocation('');
+      setShopName('');
       setText('');
       setRating(1);
       setFile(null);
+
+      // Hide snackbar after 3 seconds
+      setTimeout(() => setShowSnackbar(false), 3000);
     } catch (e) {
       console.error("Error adding review: ", e);
     }
@@ -57,21 +62,29 @@ const ReviewForm = () => {
 
   return (
     <div className="bg-gray-100 p-8 rounded-lg shadow-md max-w-lg mx-auto mt-10">
-      <h2 className="text-3xl font-bold mb-6 text center">Share Your Tea Stall Experience</h2> {/* Title for the form */}
+      <h2 className="text-3xl font-bold mb-6 text-center">Share Your Tea Stall Experience</h2>
       <form onSubmit={handleSubmit}>
-        {/* Title Input Field */}
+        {/* Location Input Field */}
         <input
           type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Title or stall name"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          placeholder="Location"
+          className="w-full p-2 border border-gray-300 rounded mb-4"
+          required
+        />
+        <input
+          type="text"
+          value={shopName}
+          onChange={(e) => setShopName(e.target.value)}
+          placeholder="Shop name"
           className="w-full p-2 border border-gray-300 rounded mb-4"
           required
         />
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Write your review here with location"
+          placeholder="Write your review..."
           className="w-full p-2 border border-gray-300 rounded mb-4"
           required
         />
@@ -92,7 +105,6 @@ const ReviewForm = () => {
           accept="image/*"
           onChange={(e) => setFile(e.target.files[0])}
           className="mb-4"
-          required
         />
         <button
           type="submit"
@@ -101,6 +113,13 @@ const ReviewForm = () => {
           Submit Review
         </button>
       </form>
+      
+      {/* Snackbar Notification */}
+      {showSnackbar && (
+      <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded shadow-lg">
+       Review submitted successfully!
+       </div>
+      )}
     </div>
   );
 };
