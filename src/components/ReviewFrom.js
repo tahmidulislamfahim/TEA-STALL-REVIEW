@@ -1,4 +1,3 @@
-// src/components/ReviewForm.js
 import React, { useState } from 'react';
 import { db, storage } from '../firebase'; // Ensure correct import path
 import { collection, addDoc } from "firebase/firestore"; // Firestore methods
@@ -61,16 +60,15 @@ const ReviewForm = () => {
   };
 
   return (
-    <div className="bg-gray-100 p-8 rounded-lg shadow-md max-w-lg mx-auto mt-10">
-      <h2 className="text-3xl font-bold mb-6 text-center">Share Your Tea Stall Experience</h2>
-      <form onSubmit={handleSubmit}>
-        {/* Location Input Field */}
+    <div className="bg-gray-100 p-6 sm:p-8 rounded-lg shadow-md max-w-lg mx-auto mt-10 w-full">
+      <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center">Share Your Tea Stall Experience</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
           placeholder="Location"
-          className="w-full p-2 border border-gray-300 rounded mb-4"
+          className="w-full p-2 border border-gray-300 rounded"
           required
         />
         <input
@@ -78,20 +76,20 @@ const ReviewForm = () => {
           value={shopName}
           onChange={(e) => setShopName(e.target.value)}
           placeholder="Shop name"
-          className="w-full p-2 border border-gray-300 rounded mb-4"
+          className="w-full p-2 border border-gray-300 rounded"
           required
         />
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Write your review..."
-          className="w-full p-2 border border-gray-300 rounded mb-4"
+          className="w-full p-2 border border-gray-300 rounded"
           required
         />
         <select
           value={rating}
           onChange={(e) => setRating(e.target.value)}
-          className="mb-4 p-2 border border-gray-300 rounded"
+          className="w-full p-2 border border-gray-300 rounded"
           required
         >
           <option value={1}>1 Star</option>
@@ -104,11 +102,11 @@ const ReviewForm = () => {
           type="file"
           accept="image/*"
           onChange={(e) => setFile(e.target.files[0])}
-          className="mb-4"
+          className="w-full"
         />
         <button
           type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
+          className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
         >
           Submit Review
         </button>
@@ -116,9 +114,9 @@ const ReviewForm = () => {
       
       {/* Snackbar Notification */}
       {showSnackbar && (
-      <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded shadow-lg">
-       Review submitted successfully!
-       </div>
+        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded shadow-lg">
+          Review submitted successfully!
+        </div>
       )}
     </div>
   );
