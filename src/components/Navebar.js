@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../logo.png';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -7,9 +8,13 @@ const Navbar = () => {
   return (
     <nav className="bg-teal-600 p-4">
       <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-white text-2xl font-bold">
-          TeaStall Reviews
-        </Link>
+      <div className="flex items-center">
+  <Link to="/" className="flex items-center text-white font-bold">
+    <img src={logo} alt="Tea Stall Logo" className="w-12 h-12 mr-3 " /> {/* Adjusted size */}
+    <span className="text-2xl sm:text-3xl md:text-4xl p-2">TeaStall Reviews</span> {/* Responsive font */}
+  </Link>
+</div>
+
 
         {/* Hamburger Icon for mobile view */}
         <button 
@@ -28,6 +33,16 @@ const Navbar = () => {
           </Link>
           <Link to="/review" className="text-white hover:text-gray-300 px-4 block sm:inline">
             Post Review
+          </Link>
+          {/* User Authentication Links */}
+          <Link to="/login" className="text-white hover:text-gray-300 px-4 block sm:inline">
+            Login
+          </Link>
+          <Link to="/signup" className="text-white hover:text-gray-300 px-4 block sm:inline">
+            Signup
+          </Link>
+          <Link to="/profile" className="text-white hover:text-gray-300 px-4 block sm:inline">
+            Profile
           </Link>
           <Link to="/admin/login" className="text-white hover:text-gray-300 px-4 block sm:inline">
             Admin Login
