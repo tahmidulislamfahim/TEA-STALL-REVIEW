@@ -1,20 +1,31 @@
-import React, { useState } from 'react';
-import { db, storage } from '../firebase'; // Ensure correct import path
-import { collection, addDoc } from "firebase/firestore"; // Firestore methods
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // Firebase storage methods
+import React, { useState, useEffect } from 'react';
+import { db, storage } from '../firebase';
+import { collection, addDoc } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 
 const ReviewForm = () => {
-  const [location, setLocation] = useState('');  // State for location
-  const [shopName, setShopName] = useState(''); 
+  const [location, setLocation] = useState('');
+  const [shopName, setShopName] = useState('');
   const [text, setText] = useState('');
   const [rating, setRating] = useState(1);
   const [file, setFile] = useState(null);
   const [showSnackbar, setShowSnackbar] = useState(false);
+  const [user] = useAuthState(auth);  // Listen to auth state
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/login'); // Redirect to login if not logged in
+    }
+  }, [user, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const imageUrl = file ? await uploadImage(file) : null;
-    
+
     const reviewData = {
       location,
       shopName,
@@ -22,6 +33,7 @@ const ReviewForm = () => {
       rating,
       imageUrl,
       timestamp: new Date(),
+      userId: user?.uid,  // Save the user ID with the review
     };
 
     submitReview(reviewData);
@@ -34,17 +46,16 @@ const ReviewForm = () => {
       const downloadURL = await getDownloadURL(snapshot.ref);
       return downloadURL;
     } catch (error) {
-      console.error("Error uploading image: ", error);
+      console.error('Error uploading image: ', error);
       return null;
     }
   };
 
   const submitReview = async (reviewData) => {
     try {
-      const docRef = await addDoc(collection(db, "reviews"), reviewData);
-      console.log("Review written with ID: ", docRef.id);
+      const docRef = await addDoc(collection(db, 'reviews'), reviewData);
+      console.log('Review written with ID: ', docRef.id);
 
-      // Show snackbar and reset form
       setShowSnackbar(true);
       setLocation('');
       setShopName('');
@@ -52,10 +63,9 @@ const ReviewForm = () => {
       setRating(1);
       setFile(null);
 
-      // Hide snackbar after 3 seconds
       setTimeout(() => setShowSnackbar(false), 3000);
     } catch (e) {
-      console.error("Error adding review: ", e);
+      console.error('Error adding review: ', e);
     }
   };
 
@@ -111,7 +121,7 @@ const ReviewForm = () => {
           Submit Review
         </button>
       </form>
-      
+
       {/* Snackbar Notification */}
       {showSnackbar && (
         <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded shadow-lg">
