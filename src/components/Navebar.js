@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../logo.png'; // Adjust the path if needed
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -7,9 +8,13 @@ const Navbar = () => {
   return (
     <nav className="bg-teal-600 p-4">
       <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-white text-2xl font-bold">
-          TeaStall Reviews
-        </Link>
+        {/* Logo and Title */}
+        <div className="flex items-center">
+          <Link to="/" className="flex items-center text-white text-2xl font-bold">
+            <img src={logo} alt="Tea Stall Logo" className="w-12 h-12 mr-2" />
+            <span>TeaStall Reviews</span>
+          </Link>
+        </div>
 
         {/* Hamburger Icon for mobile view */}
         <button 
