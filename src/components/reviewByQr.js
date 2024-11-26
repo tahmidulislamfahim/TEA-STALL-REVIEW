@@ -30,7 +30,7 @@ const Qr = () => {
     // Update QR URL dynamically if shopName or location changes
     if (shopName && location) {
       setReviewQrUrl(
-        `https://teastallbd.netlify.app//Qr?shopName=${encodeURIComponent(shopName)}&location=${encodeURIComponent(location)}`
+        `https://teastallbd.netlify.app/Qr?shopName=${encodeURIComponent(shopName)}&location=${encodeURIComponent(location)}`
       );
     }
   }, [user, loading, navigate, shopName, location]);
