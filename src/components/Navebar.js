@@ -37,9 +37,9 @@ const Navbar = () => {
           <Link to="/review" className="text-white hover:text-gray-300 px-4 block sm:inline">
             Post Review
           </Link>
-          <Link to="/Qr" className="text-white hover:text-gray-300 px-4 block sm:inline">
+          {/* <Link to="/Qr" className="text-white hover:text-gray-300 px-4 block sm:inline">
             QR
-          </Link>
+          </Link> */}
           {/* User Authentication Links */}
           <Link to="/login" className="text-white hover:text-gray-300 px-4 block sm:inline">
             Login
@@ -53,7 +53,7 @@ const Navbar = () => {
           <Link to="/admin/login" className="text-white hover:text-gray-300 px-4 block sm:inline">
             Admin Login
           </Link>
-        </div>
+        </div> 
       </div>
     </nav>
   );
