@@ -10,6 +10,7 @@ import AdminLogin from './pages/AdminLogin';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from './firebase'; // Import Firebase Auth
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Qr from './components/reviewByQr';
 
 function App() {
   const [user] = useAuthState(auth);
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/review" element={user ? <Review /> : <UserLogin />} /> {/* Protect the review page */}
+        <Route path="/Qr" element={ <Qr /> } /> {/* Protect the review page */}
         <Route path="/login" element={<UserLogin />} />
         <Route path="/signup" element={<UserSignup />} />
         <Route path="/profile" element={user ? <UserProfile /> : <UserLogin />} /> {/* Protect profile page */}

@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../logo.png';
 
+
+
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -34,6 +37,9 @@ const Navbar = () => {
           <Link to="/review" className="text-white hover:text-gray-300 px-4 block sm:inline">
             Post Review
           </Link>
+          {/* <Link to="/Qr" className="text-white hover:text-gray-300 px-4 block sm:inline">
+            QR
+          </Link> */}
           {/* User Authentication Links */}
           <Link to="/login" className="text-white hover:text-gray-300 px-4 block sm:inline">
             Login
