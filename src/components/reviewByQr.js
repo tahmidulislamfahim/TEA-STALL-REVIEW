@@ -24,10 +24,11 @@ const Qr = () => {
 
   useEffect(() => {
     if (loading) return;
-    if (!user) {
-      navigate('/login');
-    }
+    // if (!user) {
+    //   navigate('/login');
+    // }  
     // Update QR URL dynamically if shopName or location changes
+     //h
     if (shopName && location) {
       setReviewQrUrl(
         `https://teastallbd.netlify.app/Qr?shopName=${encodeURIComponent(shopName)}&location=${encodeURIComponent(location)}`
