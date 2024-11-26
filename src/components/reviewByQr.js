@@ -82,6 +82,7 @@ const Qr = () => {
           placeholder="Location"
           className="w-full p-2 border border-gray-300 rounded"
           required
+          disabled
         />
         <input
           type="text"
@@ -90,6 +91,7 @@ const Qr = () => {
           placeholder="Shop name"
           className="w-full p-2 border border-gray-300 rounded"
           required
+          disabled
         />
         <textarea
           value={text}
