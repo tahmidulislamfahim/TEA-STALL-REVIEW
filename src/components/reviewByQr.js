@@ -19,14 +19,11 @@ const Qr = () => {
   const [reviewQrUrl, setReviewQrUrl] = useState('');
 
   useEffect(() => {
+    // Update QR URL dynamically if shopName or location changes
     if (shopName && location) {
-      const baseUrl =
-        window.location.hostname === 'localhost'
-          ? 'http://192.168.0.159:3000/Qr'
-          : 'https://teastallbd.netlify.app/Qr';
-  
       setReviewQrUrl(
-        `${baseUrl}?shopName=${encodeURIComponent(shopName)}&location=${encodeURIComponent(location)}`
+        `https://teastallbd.netlify.app/Qr?shopName=${encodeURIComponent(shopName)}&location=${encodeURIComponent(location)}`
+      
       );
     }
   }, [shopName, location]);
