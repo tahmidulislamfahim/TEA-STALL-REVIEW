@@ -1,28 +1,52 @@
-// src/components/PhotoGallery.js
-import React from 'react';
-
-const photos = [
-  { id: 1, src: '/images/tea1.jpg', alt: 'Tea Stall 1' },
-  { id: 2, src: '/images/tea1.jpg', alt: 'Tea Stall 2' },
-  { id: 3, src: '/images/tea3.jpg', alt: 'Tea Stall 3' },
-  { id: 4, src: '/images/tea4.jpeg', alt: 'Tea Stall 3' },
-  { id: 5, src: '/images/tea5.jpeg', alt: 'Tea Stall 3' },
-  { id: 6, src: '/images/tea6.jpeg', alt: 'Tea Stall 3' },
-  // Add more photos as needed
-];
+import React, { useState, useEffect } from 'react';
+import { db } from '../firebase';
+import { collection, getDocs } from 'firebase/firestore';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Navigation, Pagination } from 'swiper/modules';
 
 const PhotoGallery = () => {
+  const [photos, setPhotos] = useState([]);
+  
+  useEffect(() => {
+    const fetchPhotos = async () => {
+      const querySnapshot = await getDocs(collection(db, 'reviews'));
+      const photoData = querySnapshot.docs.map(doc => doc.data()).filter(review => review.imageUrl);
+      setPhotos(photoData);
+    };
+
+    fetchPhotos();
+  }, []);
+
   return (
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">Photo Gallery</h2>
-      {/* Wrapper for horizontal scroll */}
-      <div className="flex overflow-x-scroll whitespace-nowrap space-x-4 p-2">
-        {photos.map(photo => (
-          <div key={photo.id} className="inline-block overflow-hidden rounded-lg shadow-lg">
-            <img src={photo.src} alt={photo.alt} className="w-60 h-60 object-cover" />
-          </div>
+      <Swiper
+        modules={[Navigation, Pagination]}
+        navigation
+        pagination={{ clickable: true }}
+        spaceBetween={16}
+        slidesPerView={3}
+        breakpoints={{
+          640: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+        }}
+      >
+        {photos.map((photo, index) => (
+          <SwiperSlide key={index}>
+            <div className="overflow-hidden rounded-lg shadow-lg">
+              <img
+                src={photo.imageUrl}
+                alt={`Review ${index}`}
+                className="w-full h-60 object-cover"
+              />
+            </div>
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </div>
   );
 };

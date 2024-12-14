@@ -94,14 +94,7 @@ const Qr = () => {
           required
           disabled
         />
-        <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="Write your review..."
-          className="w-full p-2 border border-gray-300 rounded"
-          required
-        />
-        <select
+         <select
           value={rating}
           onChange={(e) => setRating(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded"
@@ -113,6 +106,14 @@ const Qr = () => {
           <option value={4}>4 Stars</option>
           <option value={5}>5 Stars</option>
         </select>
+        <textarea
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Write your review..."
+          className="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+       
         <input
           type="file"
           accept="image/*"
