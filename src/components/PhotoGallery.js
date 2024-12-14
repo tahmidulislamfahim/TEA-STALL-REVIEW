@@ -9,12 +9,15 @@ import { Navigation, Pagination } from 'swiper/modules';
 
 const PhotoGallery = () => {
   const [photos, setPhotos] = useState([]);
-  
+
   useEffect(() => {
     const fetchPhotos = async () => {
       const querySnapshot = await getDocs(collection(db, 'reviews'));
       const photoData = querySnapshot.docs.map(doc => doc.data()).filter(review => review.imageUrl);
-      setPhotos(photoData);
+
+      // Shuffle the array and pick the first 10 items
+      const shuffledPhotos = photoData.sort(() => Math.random() - 0.5).slice(0, 10);
+      setPhotos(shuffledPhotos);
     };
 
     fetchPhotos();
@@ -28,7 +31,7 @@ const PhotoGallery = () => {
         navigation
         pagination={{ clickable: true }}
         spaceBetween={16}
-        slidesPerView={3}
+        slidesPerView={4}
         breakpoints={{
           640: { slidesPerView: 1 },
           768: { slidesPerView: 2 },
