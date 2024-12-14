@@ -5,8 +5,6 @@ import { collection, getDocs } from 'firebase/firestore';
 const ReviewList = () => {
   const [reviews, setReviews] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [shopSearch, setShopSearch] = useState('');
-  const [ratingSearch, setRatingSearch] = useState('');
   const [modalShop, setModalShop] = useState(null);
   const modalRef = useRef(null);
 
@@ -34,16 +32,9 @@ const ReviewList = () => {
     return acc;
   }, {});
 
-  const filteredShops = Object.keys(groupedReviews).filter(shop => {
-    const shopData = groupedReviews[shop];
-    const matchesLocation = shopData.reviews[0].location.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesShopName = shopData.reviews[0].shopName.toLowerCase().includes(shopSearch.toLowerCase());
-    const matchesRating = ratingSearch
-      ? Math.round(shopData.avgRating) === parseInt(ratingSearch)
-      : true;
-
-    return matchesLocation && matchesShopName && matchesRating;
-  });
+  const filteredShops = Object.keys(groupedReviews).filter(shop =>
+    groupedReviews[shop].reviews[0].location.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const openModal = (shopName) => {
     setModalShop(shopName);
@@ -70,34 +61,16 @@ const ReviewList = () => {
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">Reviews</h2>
 
-      {/* Search Inputs */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-        <input
-          type="text"
-          placeholder="Search by location"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="p-2 border border-gray-300 rounded"
-        />
-        <input
-          type="text"
-          placeholder="Search by shop name"
-          value={shopSearch}
-          onChange={(e) => setShopSearch(e.target.value)}
-          className="p-2 border border-gray-300 rounded"
-        />
-        <input
-          type="number"
-          placeholder="Search by rating (1-5)"
-          value={ratingSearch}
-          onChange={(e) => setRatingSearch(e.target.value)}
-          className="p-2 border border-gray-300 rounded"
-        />
-      </div>
+      <input
+        type="text"
+        placeholder="Search by location"
+        value={searchTerm}
+        onChange={e => setSearchTerm(e.target.value)}
+        className="mb-4 p-2 border border-gray-300 rounded"
+      />
 
-      {/* Shop Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredShops.map((shop) => (
+        {filteredShops.map(shop => (
           <div key={shop} className="bg-white rounded-lg shadow-lg p-4">
             <h3 className="text-xl font-semibold capitalize">{groupedReviews[shop].reviews[0].shopName}</h3>
             <p className="text-gray-700 mt-1">Location: {groupedReviews[shop].reviews[0].location}</p>
@@ -117,7 +90,6 @@ const ReviewList = () => {
         ))}
       </div>
 
-      {/* Modal */}
       {modalShop && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div
@@ -137,7 +109,7 @@ const ReviewList = () => {
             </div>
 
             <div className="space-y-4 mt-16">
-              {groupedReviews[modalShop].reviews.map((review) => (
+              {groupedReviews[modalShop].reviews.map(review => (
                 <div key={review.id} className="bg-gray-100 p-4 rounded-lg shadow">
                   <p className="text-gray-700">{review.text}</p>
                   <div className="flex items-center mt-2">
@@ -145,11 +117,7 @@ const ReviewList = () => {
                     <span className="ml-2 text-gray-500">{review.rating} Stars</span>
                   </div>
                   {review.imageUrl && (
-                    <img
-                      src={review.imageUrl}
-                      alt={review.location}
-                      className="mt-2 rounded w-50 h-48 object-cover"
-                    />
+                    <img src={review.imageUrl} alt={review.location} className="mt-2 rounded w-50 h-48 object-cover" />
                   )}
                 </div>
               ))}
