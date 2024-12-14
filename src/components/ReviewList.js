@@ -91,9 +91,6 @@ const ReviewList = () => {
           placeholder="Search by rating (1-5)"
           value={ratingSearch}
           onChange={(e) => setRatingSearch(e.target.value)}
-          min="1"
-          max="5"
-          step="1"
           className="p-2 border border-gray-300 rounded"
         />
       </div>
