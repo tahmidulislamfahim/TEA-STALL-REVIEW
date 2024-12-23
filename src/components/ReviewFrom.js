@@ -78,7 +78,7 @@ const ReviewForm = () => {
           value={location}
           onChange={(e) => setLocation(e.target.value)}
           placeholder="Location"
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-2 border border-gray-300 rounded sm:text-lg"
           required
         />
         <input
@@ -86,20 +86,13 @@ const ReviewForm = () => {
           value={shopName}
           onChange={(e) => setShopName(e.target.value)}
           placeholder="Shop name"
-          className="w-full p-2 border border-gray-300 rounded"
-          required
-        />
-        <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="Write your review..."
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-2 border border-gray-300 rounded sm:text-lg"
           required
         />
         <select
           value={rating}
           onChange={(e) => setRating(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-2 border border-gray-300 rounded sm:text-lg"
           required
         >
           <option value={1}>1 Star</option>
@@ -108,6 +101,13 @@ const ReviewForm = () => {
           <option value={4}>4 Stars</option>
           <option value={5}>5 Stars</option>
         </select>
+        <textarea
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Write your review..."
+          className="w-full p-2 border border-gray-300 rounded sm:text-lg"
+          required
+        />
         <input
           type="file"
           accept="image/*"
@@ -116,7 +116,7 @@ const ReviewForm = () => {
         />
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
+          className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200 sm:text-lg"
         >
           Submit Review
         </button>
@@ -124,7 +124,7 @@ const ReviewForm = () => {
 
       {/* Snackbar Notification */}
       {showSnackbar && (
-        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded shadow-lg">
+        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded shadow-lg sm:text-lg">
           Review submitted successfully!
         </div>
       )}
