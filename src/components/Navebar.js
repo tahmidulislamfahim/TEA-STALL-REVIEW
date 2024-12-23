@@ -47,15 +47,15 @@ const Navbar = () => {
           <Link to="/login" className="text-white hover:text-gray-300 px-4 py-2">
             Login
           </Link>
-          <Link to="/signup" className="text-white hover:text-gray-300 px-4 py-2">
+          {/* <Link to="/signup" className="text-white hover:text-gray-300 px-4 py-2">
             Signup
-          </Link>
+          </Link> */}
           <Link to="/profile" className="text-white hover:text-gray-300 px-4 py-2">
             Profile
           </Link>
-          <Link to="/admin/login" className="text-white hover:text-gray-300 px-4 py-2">
+          {/* <Link to="/admin/login" className="text-white hover:text-gray-300 px-4 py-2">
             Admin Login
-          </Link>
+          </Link> */}
         </div>
       </div>
 
@@ -84,13 +84,13 @@ const Navbar = () => {
         >
           Login
         </Link>
-        <Link
+        {/* <Link
           to="/signup"
           className="block text-white hover:text-gray-300 py-2"
           onClick={() => setIsMenuOpen(false)}
         >
           Signup
-        </Link>
+        </Link> */}
         <Link
           to="/profile"
           className="block text-white hover:text-gray-300 py-2"
@@ -98,13 +98,13 @@ const Navbar = () => {
         >
           Profile
         </Link>
-        <Link
+        {/* <Link
           to="/admin/login"
           className="block text-white hover:text-gray-300 py-2"
           onClick={() => setIsMenuOpen(false)}
         >
           Admin Login
-        </Link>
+        </Link> */}
       </div>
     </nav>
   );
