@@ -78,24 +78,24 @@ const ReviewList = () => {
   }, );
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Reviews</h2>
+    <div className="p-6 bg-gray-100 min-h-screen">
+      <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Shop Reviews</h2>
 
       {/* Search Inputs */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
         <input
           type="text"
           placeholder="Search by location"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="p-2 border border-gray-300 rounded"
+          className="p-3 border border-gray-300 rounded-lg shadow-md focus:ring-2 focus:ring-teal-500 focus:outline-none"
         />
         <input
           type="text"
           placeholder="Search by shop name"
           value={shopSearch}
           onChange={(e) => setShopSearch(e.target.value)}
-          className="p-2 border border-gray-300 rounded"
+          className="p-3 border border-gray-300 rounded-lg shadow-md focus:ring-2 focus:ring-teal-500 focus:outline-none"
         />
         <input
           type="number"
@@ -105,29 +105,29 @@ const ReviewList = () => {
           min="1"
           max="5"
           step="1"
-          className="p-2 border border-gray-300 rounded"
+          className="p-3 border border-gray-300 rounded-lg shadow-md focus:ring-2 focus:ring-teal-500 focus:outline-none"
         />
       </div>
 
       {/* Shop Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredShops.map((shop) => (
-          <div key={shop} className="bg-white rounded-lg shadow-lg p-4">
-            <h3 className="text-xl font-semibold capitalize">
+          <div key={shop} className="bg-white rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform">
+            <h3 className="text-xl font-bold text-teal-600 capitalize">
               {groupedReviews[shop].reviews[0].shopName}
             </h3>
-            <p className="text-gray-700 mt-1">
+            <p className="text-gray-700 mt-2">
               Location: {groupedReviews[shop].reviews[0].location}
             </p>
-            <p className="text-gray-500 mt-1">
+            <p className="text-gray-500 mt-2">
               {groupedReviews[shop].reviews.length} people reviewed this shop
             </p>
-            <p className="text-yellow-500 mt-1">
+            <p className="text-yellow-500 mt-2 font-semibold">
               Average Rating: {groupedReviews[shop].avgRating.toFixed(1)} ★
             </p>
             <button
               onClick={() => openModal(shop)}
-              className="mt-2 text-blue-500 hover:underline"
+              className="mt-4 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 focus:ring-2 focus:ring-teal-300 focus:outline-none"
             >
               View Reviews
             </button>
@@ -140,8 +140,7 @@ const ReviewList = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div
             ref={modalRef}
-            className="bg-white p-6 rounded-lg w-11/12 max-w-4xl overflow-y-auto max-h-[80vh] relative"
-          >
+            className="bg-white p-6 rounded-lg w-11/12 max-w-4xl overflow-y-auto max-h-[80vh] relative shadow-2xl">
             <div className="absolute top-0 left-0 right-0 bg-teal-600 text-white p-4 rounded-t-lg">
               <h2 className="text-2xl font-bold capitalize">
                 {groupedReviews[modalShop].reviews[0].shopName} Reviews
@@ -166,7 +165,7 @@ const ReviewList = () => {
                     <img
                       src={review.imageUrl}
                       alt={review.location}
-                      className="mt-2 rounded w-50 h-48 object-cover"
+                      className="mt-2 rounded-lg w-48 h-48 object-cover"
                     />
                   )}
                 </div>
