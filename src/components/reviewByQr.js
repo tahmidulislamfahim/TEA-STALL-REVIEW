@@ -16,7 +16,7 @@ const Qr = () => {
   const [rating, setRating] = useState(1);
   const [file, setFile] = useState(null);
   const [showSnackbar, setShowSnackbar] = useState(false);
-  const [, setReviewQrUrl] = useState('');
+  const [,setReviewQrUrl] = useState('');
 
   useEffect(() => {
     // Update QR URL dynamically if shopName or location changes
