@@ -3,7 +3,7 @@ import { db, storage } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useSearchParams } from 'react-router-dom';
-import { QRCodeCanvas } from 'qrcode.react';
+//import { QRCodeCanvas } from 'qrcode.react';
 
 const Qr = () => {
   const [searchParams] = useSearchParams(); // Hook to read URL parameters
@@ -16,7 +16,7 @@ const Qr = () => {
   const [rating, setRating] = useState(1);
   const [file, setFile] = useState(null);
   const [showSnackbar, setShowSnackbar] = useState(false);
-  const [reviewQrUrl, setReviewQrUrl] = useState('');
+  const [,setReviewQrUrl] = useState('');
 
   useEffect(() => {
     // Update QR URL dynamically if shopName or location changes
@@ -126,17 +126,7 @@ const Qr = () => {
         </button>
       </form>
 
-      {reviewQrUrl && (
-        <div className="mt-8 text-center">
-          <h3 className="text-lg font-semibold mb-2">Scan to Access the Review Form</h3>
-          <div className="flex justify-center">
-            <QRCodeCanvas value={reviewQrUrl} size={200} />
-          </div>
-          <p className="text-gray-600 mt-4 sm:text-lg">
-            Use your phone to scan this QR code and open the review form directly with pre-loaded information (shop name and location).
-          </p>
-        </div>
-      )}
+     
 
       {showSnackbar && (
         <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded shadow-lg sm:text-lg">
